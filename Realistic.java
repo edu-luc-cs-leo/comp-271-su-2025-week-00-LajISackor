@@ -1,8 +1,27 @@
 import java.util.Arrays; // from printing array
-
 /**
  * A class to demonstrate minimum heap operations using arrays
  */
+
+ /*
+ * EXPLANATION OF LOOPS:
+ * 
+ * First loop:
+ * for (int i = 0; i < smallest_index; i++)
+ * Copies all elements before the smallest element to the same positions in `temporary`.
+ * 
+ * Second loop:
+ * for (int i = smallest_index + 1; i < arr.length; i++)
+ * Skips the smallest element and shifts later elements one spot to the left.
+ * This is why we use: temporary[i - 1] = arr[i];
+ * 
+ * Goal:
+ * To remove the smallest value by copying over everything except that element.
+ * 
+ * Result:
+ * The arr is updated to a shorter array with the smallest element removed.
+ */
+
 public class Realistic {
 
     /** Set up our test array. */
@@ -61,6 +80,29 @@ public class Realistic {
         return result; // smallest element
     } // method getSmallest
 
+     /**
+     * Add a new value to the end of the array.
+     * The method increases the size of arr by one,
+     * copies all previous elements, and appends the new value at the end.
+     *
+     * @param value the value to be added to the array
+     */
+    public static void add(int value) {
+        // Step 1: Create a new array one element larger
+        int[] bigger = new int[arr.length + 1];
+
+        // Step 2: Copy elements from original array to new array
+        for (int i = 0; i < arr.length; i++) {
+            bigger[i] = arr[i];
+        }
+
+        // Step 3: Insert the new value at the last index
+        bigger[bigger.length - 1] = value;
+
+        // Step 4: Update arr to refer to the new array
+        arr = bigger;
+    }
+
     /** Driver/simple test code */
     public static void main(String[] args) {
         System.out.printf("\n\nArray before removal of smallest element: %s",
@@ -69,4 +111,5 @@ public class Realistic {
         System.out.printf("\nArray after removal of smallest element: %s\n\n",
                 Arrays.toString(arr));
     } // method main
+
 } // class Realistic
